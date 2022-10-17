@@ -7,7 +7,9 @@ package managers;
 
 import entity.Author;
 import entity.Book;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -158,10 +160,38 @@ public class BookManager {
                                 for (int j = 0; j < authors2.length; j++) {
                                     System.out.println(Arrays.toString(authors2));
                                     System.out.println("Выберете номер автора: ");
-                                    index = scanner.nextInt()-1;
+                                    int index2 = scanner.nextInt()-1;
                                     scanner.nextLine(); 
-                                    
-                                    //authors2[index] = null;
+                                    List<Author> tempAuthors = new ArrayList<Author>(Arrays.asList(authors2));
+                                    tempAuthors.remove(index2);
+                                    authors2 = tempAuthors.toArray(new Author[0]);
+                                    if(countAuthorsInBook == authors2.length) {
+                                        System.out.println("Изменить: " + (j+1) + " автора y|n?");
+                                        str = scanner.nextLine();
+                                        if(str.equals("y")) {
+                                            System.out.println("Изменить имя :"+ (j+1)+ " автора y|n?");
+                                            str = scanner.nextLine();
+                                            if(str.equals("y")) {
+                                                System.out.println("Введите имя: ");
+                                                authors2[j].setFirstname(scanner.nextLine());
+                                            }
+
+                                            System.out.println("Изменить Фамилию:"+ (j+1)+ " автора y|n?");
+                                            str = scanner.nextLine();
+                                            if(str.equals("y")) {
+                                                System.out.println("Введите фамилию: ");
+                                                authors2[j].setLastname(scanner.nextLine());
+                                            }
+
+                                            System.out.println("Изменить Дату рождения: "+ (j+1)+ " автора y|n?");
+                                            str = scanner.nextLine();
+                                            if(str.equals("y")) {
+                                                System.out.println("Введите Дату: ");
+                                                authors2[j].setBirthYear(scanner.nextInt());
+                                                scanner.nextLine();
+                                            }
+                                        }
+                                    }
                                 }
                                 books[index].setAuthors(authors2);   
                             }
